@@ -1,3 +1,7 @@
+const Category = require("../model/category.model");
+
+
+
 const getAllCategory = async (req, res) => {
     const categories = await Category.find()
 
@@ -5,16 +9,17 @@ const getAllCategory = async (req, res) => {
 }
 
 const addCategory = async (req, res) => {
-    const { title } = req.body
+    const category = await Category.create({
+        name: req.body.name
+    });
 
-    await Category.create({
-        title
-    })
-    
     res.status(201).json({
         message: "Category yaratildi"
     })
-}
+};
+    
+  
+
 
 const updateCategory = async (req, res) => {
     const { title } = req.body

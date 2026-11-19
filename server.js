@@ -4,19 +4,23 @@ const cors = require("cors")
 const connectDB = require("./config/db")
 const authRouter = require("./router/auth.routes")
 const categoryRouter = require("./router/category.routes")
+const productRouter = require("./router/products.routes")
+
 
 const app = express()
 app.use(cors())
-const POST = process.env.POST || 300
+app.use(express.urlencoded({extended:true}))
+const PORT = process.env.PORT || 300
 
 
 // router
 app.use(express.json())
 app.use("/api/auth", authRouter)
 app.use("/api/category", categoryRouter)
+app.use("/api/product",productRouter)
 
 connectDB()
 
-app.listen(POST, () => {
-    console.log("Server is running at: " + POST);
+app.listen(PORT, () => {
+    console.log("Server is running at: " + PORT);
 })
